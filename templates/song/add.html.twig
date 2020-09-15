@@ -26,7 +26,7 @@
 					</div>
                      <div class="form-row mb-3">
                         <label for="name">Vos Playlist</label>
-                        <select class="form-control" id="name">
+                        <select class="form-control" name="name" id="name">
                             {% for list in playlists %}
 						  		<option value="{{ list.id }}">{{ list.name }}</option>
 							{% endfor %}

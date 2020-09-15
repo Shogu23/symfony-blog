@@ -40,7 +40,7 @@ class SongController extends AbstractController
                 $song = new Song();
                 $song->setTitle($safe['title']);
                 // Je vais chercher les "playlists" dans le controller Playlist.
-                $playlist = $em->getRepository(Playlist::class)->find($safe['playlist']);
+                $playlist = $em->getRepository(Playlist::class)->find($safe['name']);
                 $song->setPlaylist($playlist);
                 $em->persist($song);
                 $em->flush();
