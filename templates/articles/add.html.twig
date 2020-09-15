@@ -10,6 +10,14 @@
 			<div class="col-7">
 				<h1 class="text-center">Ajouter un article !</h1>
 
+				{% for level, messages in app.flashes %}
+					{% for message in messages %}
+						<div class="alert alert-{{ level }}">
+							{{ message|raw }}
+						</div>
+					{% endfor %}
+				{% endfor %}
+
 				<form method="post" enctype="multipart/form-data">
 					<div class="form-row mb-3">
 						<label for="title" class="col-form-label col-4">Titre</label>
@@ -23,13 +31,13 @@
 							<textarea name="content" id="content" class="form-control" placeholder="Dites nous en plus..."></textarea>
 						</div>
 					</div>
-                    <div class="form-row mb-3">
-                        <label for="add" class="col-form-label col-4">Ajouter une image</label>
-                        <div class="custom-file col-8">
-                            <label class="custom-file-label" for="image">Add</label>
-						    <input type="file" class="custom-file-input" name="image" id="image">
-					    </div>
-                    </div>
+					<div class="form-row mb-3">
+						<label for="add" class="col-form-label col-4">Ajouter une image</label>
+						<div class="custom-file col-8">
+							<label class="custom-file-label" for="image">Add</label>
+							<input type="file" class="custom-file-input" name="image" id="image">
+						</div>
+					</div>
 
 					<div class="text-center">
 						<button type="submit" class="btn btn-dark">Enregistrer</button>
@@ -39,7 +47,6 @@
 			</div>
 		</div>
 	</div>
-
 
 
 {% endblock %}

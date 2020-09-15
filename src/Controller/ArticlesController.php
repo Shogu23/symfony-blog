@@ -101,9 +101,22 @@ class ArticlesController extends AbstractController
                 $em->persist($article);
                 $em->flush(); // Equivalent de notre "execute()"
 
+                $this->addFlash('success', 'Bravo votre article a bien été enregistré');
+
             }
             else {
-                dd($errors);
+                // $this->addFlash('Niveau d'alert', 'message qu'on veut afficher' );
+                /**
+                 * La méthode addFlash est l'équivalent de $_SESSION['message']
+                 * @see https://symfony.com/doc/current/controller.html#flash-messages
+                 * On peut utiliser les niveaux d'alertes suivants. Ces niveaux d'alerte me permette de faire facilement du css
+                 * danger
+                 * warning
+                 * info
+                 * success
+                 */
+                // La fonction implode() permet de réunir les élements d'un tableau en une chaine s"parée ii par un <br>
+                $this->addFlash('danger', implode('<br>', $errors));
             }
         }
 
@@ -113,22 +126,45 @@ class ArticlesController extends AbstractController
     }
 
     /**
-     * Page listant tous les articles
+     * Page liste des articles
+     * @Route("/articles/list", name="articles_list")
      */
     public function list()
     {
+        // J'appelle ma base de données
+        $em = $this->getDoctrine()->getManager();
+
+        // J'accède à la table
+        // La variable $articles, contient tout mes articles
+
+        // Rappelle de la fonction findBy
+        $articles = $em->getRepository(Articles::class)
+                        ->findBy([], ['created_at' => 'DESC']);
+
+        // Méthode findBy alternative
+        // $em = $this->getDoctrine()->getRepository(Articles::class)->findBy([],['created_at' => 'desc']);
+        
         return $this->render('articles/list.html.twig', [
-            'controller_name' => 'ArticlesController',
+            'articles' => $articles,
         ]);
     }
 
     /**
      * Page de detail d'un article
+     * @Route("/article/view/{id_article}", name="article_view")
      */
-    public function view()
+    public function view(int $id_article)
     {
+        // J'appelle ma base de données
+        $em = $this->getDoctrine()->getManager();
+
+        // J'accède à la table
+        // La variable $article, contient mon article (by id)
+        $article = $em->getRepository(Articles::class)
+                        ->find($id_article);
+
         return $this->render('articles/view.html.twig', [
-            'controller_name' => 'ArticlesController',
+            'article' => $article,
         ]);
     }
 

@@ -20,7 +20,19 @@
                         <a class="nav-link" href="{{ path('default_index') }}">Accueil <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ path('articles_list') }}">Liste des articles</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ path('articles_add') }}">Ajouter un article</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"   aria-haspopup="true"             aria-expanded="false">
+                          Playlist
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('playlist_add') }}">Créer une playlist</a>
+                            <a class="dropdown-item" href="{{ path('song_add') }}">Ajouter à une playlist </a>
+                        </div>
                     </li>
                 </div>
             </nav>

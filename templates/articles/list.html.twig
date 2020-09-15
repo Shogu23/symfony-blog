@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de tout les articles
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12">
+                <h1>Voici la liste de tout les articles</h1>
+			        {% for article in articles %}
+			        	<div class="mb-3 border-bottom">
+			        		<h3>{{ article.title }}</h5>
+			        		<p>{{ article.content }}</p>
+
+                            <p class="small text-right text-muted">Publié le {{ article.createdAt|date('d-m-Y H:i') }}</p>
+
+                            {#
+                                Pour construire mon lien j'ajoute le paramètre 'id_article' que j'ai défini dans la route
+                                article.id est ici l'id de l'article au même titre que article.content est le contenu
+                            #}
+                            <a href="{{ path('article_view', {id_article: article.id}) }}">Voir le detail</a>
+			        	</div>
+			        {% endfor %}
+            </div>
+
+		</div>
+	</div>
+
+{% endblock %}
