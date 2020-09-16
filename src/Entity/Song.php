@@ -27,6 +27,16 @@ class Song
      */
     private $playlist;
 
+    /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     */
+    private $link;
+
+    /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     */
+    private $file;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +62,30 @@ class Song
     public function setPlaylist(?Playlist $playlist): self
     {
         $this->playlist = $playlist;
+
+        return $this;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(?string $link): self
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    public function getFile(): ?string
+    {
+        return $this->file;
+    }
+
+    public function setFile(?string $file): self
+    {
+        $this->file = $file;
 
         return $this;
     }

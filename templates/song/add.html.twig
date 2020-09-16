@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter un titre à la playlist!{% endblock %}
+{% block title %}Ajouter un titre à la playlist!
+{% endblock %}
 
 {% block body %}
 
@@ -17,21 +18,35 @@
 					{% endfor %}
 				{% endfor %}
 
-				<form method="post">
+				<form method="post" enctype="multipart/form-data">
 					<div class="form-row mb-3">
 						<label for="title" class="col-form-label col-4">Titre de la chanson</label>
 						<div class="col-8">
 							<input type="text" name="title" id="title" class="form-control" placeholder="Votre chanson">
 						</div>
 					</div>
-                     <div class="form-row mb-3">
-                        <label for="name">Vos Playlist</label>
-                        <select class="form-control" name="name" id="name">
-                            {% for list in playlists %}
-						  		<option value="{{ list.id }}">{{ list.name }}</option>
+					<div class="form-row mb-3">
+						<label for="link" class="col-form-label col-4">Lien Youtube</label>
+						<div class="col-8">
+							<input type="text" name="link" id="link" class="form-control" placeholder="lien youtube">
+						</div>
+					</div>
+					<div class="form-row mb-3">
+						<label for="name" class="col-4">Vos Playlist</label>
+						<select class="form-control col-8" name="name" id="name">
+						<option value="" selected disabled>Sélectionnez votre playlist</option>
+							{% for list in playlists %}
+								<option value="{{ list.id }}">{{ list.name }}</option>
 							{% endfor %}
-                        </select>
-                      </div>
+						</select>
+					</div>
+					<div class="form-row mb-3">
+						<label for="file" class="col-4">Chanson</label>
+                        <div class="col-8">
+							<input type="file" class="form-control mb-5" name="file" id="file" accept=".mp3">
+							<small class="form-text text-muted">Fichiers acceptés mp3, 10mo max</small>
+						</div>
+					</div>
 					<div class="text-center">
 						<button type="submit" class="btn btn-dark">Enregistrer</button>
 					</div>

@@ -23,8 +23,8 @@ class PlaylistController extends AbstractController
             // ma variable $safe contiendra exactement les mêmes données que $_POST (mais clean)
             $safe = array_map('trim', array_map('strip_tags', $_POST));
             
-            if(strlen($safe['name']) < 3 || strlen($safe['name']) > 100){
-                $errors[] = 'Votre playlist doit comporter entre 3 et 100 caractères';
+            if(strlen($safe['name']) < 3 || strlen($safe['name']) > 50){
+                $errors[] = 'Votre playlist doit comporter entre 3 et 50 caractères';
             }
 
             // Compte le nombre d'éléments dans le tableau $errors
@@ -49,8 +49,6 @@ class PlaylistController extends AbstractController
 
         }
 
-        return $this->render('playlist/add.html.twig', [
-            'controller_name' => 'PlaylistController',
-        ]);
+        return $this->render('playlist/add.html.twig');
     }
 }
