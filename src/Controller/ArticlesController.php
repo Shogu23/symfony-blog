@@ -242,7 +242,7 @@ class ArticlesController extends AbstractController
 
                         // Je supprime l'ancien fichier qui ne sera plus utiisé:
                         $old_picture = $_SERVER['DOCUMENT_ROOT'].$update->getPicture();
-                        if(file_exists($old_picture)){
+                        if(file_exists($old_picture) && !is_dir($old_picture)){
                             unlink($old_picture);
                         }
                     };
@@ -264,6 +264,8 @@ class ArticlesController extends AbstractController
                 $em->flush(); // Equivalent de notre "execute()"
 
                 $this->addFlash('success', 'Bravo votre article a bien été mis à jour');
+
+                return $this->redirectToRoute('article_view', ['id_article' => $update->getId()]);
 
             }
             else {
