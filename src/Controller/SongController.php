@@ -95,6 +95,24 @@ class SongController extends AbstractController
                     // Je mets le chemin à partir de public/
                     $filenameInDb = 'assets/uploads/' . $filename;
                 };
+
+                $linkQuery = parse_url($safe['link']);
+
+                if(strpos($linkQuery['host'], 'youtube.com') !== false){
+    
+                    // La fonction parse_str() me permet de parset une chaine de caractère en GET
+                    // Exemple : v=ADAZDazdqsFM&lisr=EZADdqsdqZA&start_radio1&t=0
+                    // Elle deviendra un tableau associatif clé/valeur stocké dans $result
+                    // Je peux donc utiliser $result['v'] qui contiendra mon identfifiant video
+                    parse_str($linkQuery['query'], $result);
+    
+                    $identCodeYoutube = $result['v'];
+                }
+                // Les liens "partager"
+                elseif($linkQuery['host'] === 'youtu.be'){
+                    $identCodeYoutube = substr($linkQuery['path'], 1);
+                }
+                
                 // Je selectionne la table dans la quelle je travaille
                 $song = new Song();
                 $song->setTitle($safe['title']);
