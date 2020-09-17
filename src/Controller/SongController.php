@@ -98,7 +98,7 @@ class SongController extends AbstractController
                 // Je selectionne la table dans la quelle je travaille
                 $song = new Song();
                 $song->setTitle($safe['title']);
-                $song->setLink($safe['link']);
+                $song->setLink($identCodeYoutube ?? null);
                 $song->setFile($filenameInDb ?? null); // L'image, le ($filenameInDb ?? null) => operateur logique, renvoi soit $filenameInDb si, si n'existe pas renvoi null
                 // Je vais chercher les "playlists" dans le controller Playlist.
                 $playlist = $em->getRepository(Playlist::class)->find($safe['name']);
@@ -112,6 +112,19 @@ class SongController extends AbstractController
         }
         return $this->render('song/add.html.twig', [
             'playlists' => $playlists,
+        ]);
+    }
+
+    /**
+     * @Route("/song/view/{id_song}", name="song_view")
+     */
+    public function view(int $id_song)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $song = $em->getRepository(Song::class)->find($id_song);
+
+        return $this->render('song/view.html.twig', [
+            'song' => $song,
         ]);
     }
 }

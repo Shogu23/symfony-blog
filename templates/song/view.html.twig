@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Son{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h1>Son</h1>
+
+            <div class="mb-3 border-bottom">
+                <h3>{{ song.title }}</h3>
+                {{ song.getPlaylist().name }}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

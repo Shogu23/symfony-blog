@@ -51,4 +51,31 @@ class PlaylistController extends AbstractController
 
         return $this->render('playlist/add.html.twig');
     }
+
+    /**
+     * @Route("/playlist/list", name="playlist_list")
+     */
+    public function list()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $playlists = $em->getRepository(Playlist::class)->findAll();
+
+        return $this->render('playlist/list.html.twig', [
+            'playlists' => $playlists
+        ]);
+    }
+
+    /**
+     * @Route("/playlist/view/{id_de_ma_playlist}", name="playlist_view")
+     */
+    public function view(int $id_de_ma_playlist)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $playlist = $em->getRepository(Playlist::class)->find($id_de_ma_playlist);
+
+        return $this->render('playlist/view.html.twig', [
+            'playlist' => $playlist
+        ]);
+
+    }
 }

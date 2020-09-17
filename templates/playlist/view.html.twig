@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma Playlist{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12">
+                <h1>Ma Playlist : {{ playlist.name }}</h1>
+
+                <div class="row">
+			        {% for song in playlist.getSong() %}
+			        	<div class="col-6">
+                            {{ song.title }}
+                        </div>
+			        	<div class="col-6">
+                        {% if song.file is not empty %}
+                            <audio controls>
+                                <source src="{{ asset(song.file) }}" type="audio/mpeg">
+                            </audio>
+                        {% endif %}
+                        </div>
+			        	<div class="col-6">
+                        {% if song.link is not empty %}
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ song.link }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                            
+                        {% endif %}
+                        </div>
+			        {% endfor %}
+                </div>
+            </div>
+
+		</div>
+	</div>
+
+{% endblock %}

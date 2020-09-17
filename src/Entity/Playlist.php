@@ -27,11 +27,11 @@ class Playlist
     /**
      * @ORM\OneToMany(targetEntity=Song::class, mappedBy="playlist")
      */
-    private $playlist;
+    private $song;
 
     public function __construct()
     {
-        $this->playlist = new ArrayCollection();
+        $this->song = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -54,28 +54,28 @@ class Playlist
     /**
      * @return Collection|Song[]
      */
-    public function getPlaylist(): Collection
+    public function getSong(): Collection
     {
-        return $this->playlist;
+        return $this->song;
     }
 
-    public function addPlaylist(Song $playlist): self
+    public function addSong(Song $song): self
     {
-        if (!$this->playlist->contains($playlist)) {
-            $this->playlist[] = $playlist;
-            $playlist->setPlaylist($this);
+        if (!$this->song->contains($song)) {
+            $this->song[] = $song;
+            $song->setPlaylist($this);
         }
 
         return $this;
     }
 
-    public function removePlaylist(Song $playlist): self
+    public function removeSong(Song $song): self
     {
-        if ($this->playlist->contains($playlist)) {
-            $this->playlist->removeElement($playlist);
+        if ($this->song->contains($song)) {
+            $this->song->removeElement($song);
             // set the owning side to null (unless already changed)
-            if ($playlist->getPlaylist() === $this) {
-                $playlist->setPlaylist(null);
+            if ($song->getPlaylist() === $this) {
+                $song->setPlaylist(null);
             }
         }
 
