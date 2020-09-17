@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier votre article!{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-7">
+				<h1 class="text-center">Modifier votre article</h1>
+
+				{% for level, messages in app.flashes %}
+					{% for message in messages %}
+						<div class="alert alert-{{ level }}">
+							{{ message|raw }}
+						</div>
+					{% endfor %}
+				{% endfor %}
+
+				<form method="post" enctype="multipart/form-data">
+					<div class="form-row mb-3">
+						<label for="title" class="col-form-label col-4">Titre</label>
+						<div class="col-8">
+							<input type="text" name="title" id="title" class="form-control" value="{{ update.title }}">
+						</div>
+					</div>
+					<div class="form-row mb-3">
+						<label for="content" class="col-form-label col-4">Contenu</label>
+						<div class="col-8">
+							<textarea name="content" id="content" class="form-control">{{ update.content }}</textarea>
+						</div>
+					</div>
+					<div class="form-row mb-3">
+						<label for="add" class="col-form-label col-4">Ajouter une image</label>
+						<div class="col-8">
+							<input type="file" class="form-control-file" name="image" id="image">
+                            {% if update.picture is not empty %}
+                             {# La fonction asset() en twig va automatiquement vous emmener au répertoire "public" #}
+                            <img src="{{ asset(update.picture) }}" alt="image article" class="img-fluid mt-3">
+                            {% endif %}
+						</div>
+					</div>
+
+					<div class="text-center">
+						<button type="submit" class="btn btn-dark">Enregistrer</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

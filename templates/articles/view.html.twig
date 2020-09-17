@@ -12,7 +12,7 @@
 			    <h3>{{ article.title }}</h5>
 			    <p>{{ article.content|nl2br }}</p>
 
-                <p class="small text-right text-muted">Publié le {{ article.createdAt|date('d-m-Y H:i') }}</p>
+                <p class="small text-right text-muted">Publié le {{ article.createdAt|date('d-m-Y H:i') }} - <a href="{{ path('article_update', {id_article: article.id}) }}">Modifier l'article</a></p>
 
                 {% if article.picture is not empty %}
                 {# La fonction asset() en twig va automatiquement vous emmener au répertoire "public" #}

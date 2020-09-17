@@ -20,7 +20,8 @@
                                 Pour construire mon lien j'ajoute le paramètre 'id_article' que j'ai défini dans la route
                                 article.id est ici l'id de l'article au même titre que article.content est le contenu
                             #}
-                            <a href="{{ path('article_view', {id_article: article.id}) }}">Voir le detail</a>
+                            <a href="{{ path('article_view', {id_article: article.id}) }}">Voir le detail</a> -
+							<a href="{{ path('article_update', {id_article: article.id}) }}">Modifier l'article</a>
 			        	</div>
 			        {% endfor %}
             </div>
