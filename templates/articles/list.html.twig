@@ -21,7 +21,8 @@
                                 article.id est ici l'id de l'article au même titre que article.content est le contenu
                             #}
                             <a href="{{ path('article_view', {id_article: article.id}) }}">Voir le detail</a> -
-							<a href="{{ path('article_update', {id_article: article.id}) }}">Modifier l'article</a>
+							<a href="{{ path('article_update', {id_article: article.id}) }}">Modifier l'article</a> -
+							<a href="{{ path('article_delete', {id_article: article.id}) }}">Supprimer</a>
 			        	</div>
 			        {% endfor %}
             </div>

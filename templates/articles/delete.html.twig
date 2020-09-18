@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre Article {% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-7">
+                <h1>Supression d'un article</h1>
+
+			    <h3>La suppression d'un article est définitive, il sera impossible de le récupérer même si vous nous suppliez, déso!</h5>
+
+                <form method="POST">
+                    <p>Êtes vous sûr de vouloir le détruire pour de bon?</p>
+                    <ul>
+                        <li>Titre : {{ article.title }}</li>
+                        <li>Publié le : {{ article.createdAt|date('d-m-Y H:i') }}</li>
+                    </ul>
+                </form>
+
+                <input type="hidden" name="delete" value="yes">
+
+                <a href="{{ path('articles_list') }}" class="btn btn-outline-dark">Annuler</a>
+                <button type="submit" class="btn btn-danger">Oui, supprimer!</button>
+            </div>
+		</div>
+	</div>
+
+{% endblock %}

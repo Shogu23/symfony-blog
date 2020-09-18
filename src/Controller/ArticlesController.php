@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Entity\Articles; // Appelle le modèle pour insérer dans la table articles
 
 
@@ -12,6 +13,7 @@ class ArticlesController extends AbstractController
     /**
      * Page d'ajout d'article
      * @Route("/articles/add", name="articles_add")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function add()
     {
@@ -290,11 +292,31 @@ class ArticlesController extends AbstractController
 
     /**
      * Page de suppression d'un article
+     * @Route("/article/delete/{id_article}", name="article_delete")
      */
-    public function delete()
+    public function delete(int $id_article)
     {
+        // J'appelle ma base de données
+        $em = $this->getDoctrine()->getManager();
+        // J'accède à la table
+        // La variable $article, contient mon article (by id)
+        $article = $em->getRepository(Articles::class)
+                        ->find($id_article);
+
+        if(!empty($_POST)){
+
+            if(isset($_POST['delete']) && $_POST['delete'] == 'yes'){
+                // Je supprime
+                $em->remove($article); // On supprime l'article
+                $em->flush();
+
+                $this->addFlash('success', 'Votre article a bien été supprimé');
+                return $this->redirectToRoute('articles_list');
+            }
+        }
+
         return $this->render('articles/delete.html.twig', [
-            'controller_name' => 'ArticlesController',
+            'article' => $article,
         ]);
     }
 
