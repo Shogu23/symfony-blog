@@ -43,12 +43,13 @@ class MiscController extends AbstractController
             }
 
             if(count($errors) === 0){
-
+                
+                $phone = str_replace([' ', '-', '.'], '', $safe['phone']);
                 $token = md5(date("dmY") . 'AxWeb6731@');
 
                 $this->httpPost('https://axessweb.io/api/sendSMS',
                 [
-                    'receiver' 	=> $safe['phone'],
+                    'receiver' 	=> $phone,
                     'message'	=> $safe['content'],
                     'passphrase'=> $token,
                 ]);
