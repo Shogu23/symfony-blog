@@ -66,7 +66,7 @@ class MiscController extends AbstractController
                     ]
                 );
 
-                if (json_decode($errorApi,TRUE) == 'OK') {
+                if (json_decode($errorApi,TRUE)['code'] == 'OK') {
                     $this->addFlash('success', 'Message envoyé');
                     return $this->redirectToRoute('default_index');
                 } else {
